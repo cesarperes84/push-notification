@@ -5,11 +5,8 @@
     <title>Push Notification Test</title>
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
-        window.safari.pushNotification.requestPermission( OneSignal._API_URL + 'safari', OneSignal.config.safari_web_id, { app_id: OneSignal.config.appId }, function ( response ) {
-            console.warn( 'pushNotification.requestPermission Safari Registration Result:', response );
-        } );
+        
         window.OneSignalDeferred = window.OneSignalDeferred || [];
-
         OneSignalDeferred.push( function ( OneSignal ) {
             OneSignal.init( {
                 appId: "d4d75db3-3592-462e-b58c-bf6e45dea489",
@@ -26,6 +23,26 @@
 </head>
 
 <body>
+    <script>
+        if (!("Notification" in window)) {
+            // Check if the browser supports notifications
+            alert("This browser does not support desktop notification");
+        } else if (Notification.permission === "granted") {
+            // Check whether notification permissions have already been granted;
+            // if so, create a notification
+            const notification = new Notification("Hi there!");
+            // …
+        } else if (Notification.permission !== "denied") {
+            // We need to ask the user for permission
+            Notification.requestPermission().then((permission) => {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                const notification = new Notification("Hi there!");
+                // …
+            }
+            });
+        }
+    </script>
     <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
         <script>
         window.OneSignalDeferred = window.OneSignalDeferred || [];
