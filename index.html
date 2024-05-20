@@ -12,7 +12,24 @@
                 appId: "d4d75db3-3592-462e-b58c-bf6e45dea489",
                 safari_web_id: "web.onesignal.auto.30b8db8e-86b1-4367-8886-055d3d362718",
                 notifyButton: {
-                    enable: true,
+                    enable: false,
+                },
+                promptOptions: {
+                        customlink: {
+                        enabled: true, /* Required to use the Custom Link */
+                        style: "button", /* Has value of 'button' or 'link' */
+                        size: "medium", /* One of 'small', 'medium', or 'large' */
+                        color: {
+                        button: '#E12D30', /* Color of the button background if style = "button" */
+                        text: '#FFFFFF', /* Color of the prompt's text */
+                        },
+                        text: {
+                        subscribe: "Subscribe to push notifications", /* Prompt's text when not subscribed */
+                        unsubscribe: "Unsubscribe from push notifications", /* Prompt's text when subscribed */
+                        explanation: "Get updates from all sorts of things that matter to you", /* Optional text appearing before the prompt button */
+                        },
+                        unsubscribeEnabled: true, /* Controls whether the prompt is visible after subscription */
+                    }
                 },
                 allowLocalhostAsSecureOrigin: true,
             } );
@@ -25,23 +42,23 @@
 <body>
     <script>
         if (!("Notification" in window)) {
-            // Check if the browser supports notifications
-            alert("This browser does not support desktop notification");
-        } else if (Notification.permission === "granted") {
-            // Check whether notification permissions have already been granted;
-            // if so, create a notification
+        // Check if the browser supports notifications
+        alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+        // Check whether notification permissions have already been granted;
+        // if so, create a notification
+        const notification = new Notification("Hi there!");
+        // …
+    } else if (Notification.permission !== "denied") {
+        // We need to ask the user for permission
+        Notification.requestPermission().then((permission) => {
+        // If the user accepts, let's create a notification
+        if (permission === "granted") {
             const notification = new Notification("Hi there!");
             // …
-        } else if (Notification.permission !== "denied") {
-            // We need to ask the user for permission
-            Notification.requestPermission().then((permission) => {
-            // If the user accepts, let's create a notification
-            if (permission === "granted") {
-                const notification = new Notification("Hi there!");
-                // …
-            }
-            });
         }
+        });
+    }
     </script>
     <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
         <script>
@@ -55,6 +72,7 @@
 
 
     Push Notification Test
+    <div class='onesignal-customlink-container'></div>
 </body>
 
 </html>
