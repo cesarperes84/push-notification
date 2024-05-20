@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+        <title>Push Notification Test</title>
+        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+        <script>
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            OneSignalDeferred.push(function(OneSignal) {
+                OneSignal.init({
+                appId: "d4d75db3-3592-462e-b58c-bf6e45dea489",
+                safari_web_id: "web.onesignal.auto.30b8db8e-86b1-4367-8886-055d3d362718",
+                notifyButton: {
+                    enable: true,
+                },
+                allowLocalhostAsSecureOrigin: true,
+                });
+            });
+            </script>
+    </head>
+    
+    <body>
+        <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+        <script>
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(function(OneSignal) {
+            OneSignal.init({
+            appId: "d4d75db3-3592-462e-b58c-bf6e45dea489",
+            });
+        });
+        </script> -->
+        
+        
+        Push Notification Test
+    </body>
+</html>
